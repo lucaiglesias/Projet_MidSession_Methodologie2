@@ -31,8 +31,12 @@ public class GameManager : MonoBehaviour
         optionsMenu.SetActive(!optionsMenu.activeSelf);
     }
 
-    private void QuitGame()
+    public void QuitGame()
     {
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                    Application.Quit();
+#endif
     }
 }
