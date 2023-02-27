@@ -11,6 +11,13 @@ public class Character : MonoBehaviour
     public int maxLvlBar = 100;
     [SerializeField] HealthBar healthBar;
 
+    public static Character Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void TakeDamage(int damage)
     {
         currentHp -= damage;

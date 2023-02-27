@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D rgdbd2d;
 
-    [SerializeField] int hp = 999;
+    [SerializeField] int hp = 1;
     [SerializeField] int enemyAttack = 1;
     [SerializeField] int experience_points = 5;
 
