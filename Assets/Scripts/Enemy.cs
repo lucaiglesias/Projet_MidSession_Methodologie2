@@ -9,7 +9,13 @@ public class Enemy : MonoBehaviour
     GameObject targetGameObject;
     [SerializeField] float speed;
 
+    Character targetCharacter;
+
     Rigidbody2D rgdbd2d;
+
+    [SerializeField] int hp = 999;
+    [SerializeField] int enemyAttack = 1;
+    [SerializeField] int experience_points = 5;
 
     private void Awake()
     {
@@ -33,6 +39,24 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("Attacking the character! -1");
+        if(targetCharacter == null)
+        {
+            targetCharacter = targetGameObject.GetComponent<Character>();
+        }
+
+        targetCharacter.TakeDamage(enemyAttack);
+        Debug.Log("Attacking the character! " +targetCharacter.currentHp);
+
+    }
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+
+        if (hp <= 0)
+        {
+            this.gameObject.SetActive(false);
+            targetCharacter.LevelUp(experience_points);
+        }
     }
 }

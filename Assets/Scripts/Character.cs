@@ -4,15 +4,44 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int maxHp = 1000;
+    public int currentHp = 1000;
+    public int lvl = 1;
+    public int lvlBar;
+    public int maxLvlBar = 100;
+    [SerializeField] HealthBar healthBar;
+
+    public void TakeDamage(int damage)
     {
+        currentHp -= damage;
+        if(currentHp <= 0)
+        {
+            Debug.Log("Character is dead");
+        }
+
+        healthBar.SetState(currentHp, maxHp);
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Heal(int amount)
     {
-        
+        if(currentHp <= 0) { return; }
+
+        currentHp += amount;
+        if(currentHp > maxHp)
+        {
+            currentHp = maxHp;
+        }
+    }
+
+    public void LevelUp(int lvlup)
+    {
+        lvlBar += lvlup;
+
+        if(lvlBar >= maxLvlBar)
+        {
+            lvl++;
+            lvlBar -= maxLvlBar;
+        }
     }
 }

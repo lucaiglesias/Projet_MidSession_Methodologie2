@@ -14,6 +14,8 @@ public class WhipWeapon : MonoBehaviour
     //[SerializeField] GameObject downWhipObject;
 
     PlayerMove playerMove;
+    [SerializeField] Vector2 whipAttackSize = new Vector2(4f, 2f);
+    [SerializeField] int whipDamage = 1;
 
     private void Awake()
     {
@@ -32,47 +34,32 @@ public class WhipWeapon : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
         timer = timeToAttack;
 
         if(playerMove.lastHorizontalVector > 0)
         {
             rightWhipObject.SetActive(true);
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(rightWhipObject.transform.position, whipAttackSize, 0f);
+            ApplyDamage(colliders);
         }
         else
         {
             leftWhipObject.SetActive(true);
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(leftWhipObject.transform.position, whipAttackSize, 0f);
+            ApplyDamage(colliders);
         }
-        //else
-        //{
-        //    rightWhipObject.SetActive(false);
-        //}
 
-        //if(playerMove.movementVector.x < -1)
-        //{
-        //    leftWhipObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    leftWhipObject.SetActive(false);
-        //}
-
-        //if(playerMove.movementVector.y > 1)
-        //{
-        //    upWhipObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    upWhipObject.SetActive(false);
-        //}
-
-        //if(playerMove.movementVector.y < -1)
-        //{
-        //    downWhipObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    downWhipObject.SetActive(false);
-        //}
+    }
+    private void ApplyDamage(Collider2D[] colliders)
+    {
+        for(int i = 0; i < colliders.Length; i++)
+        {
+            Enemy e = colliders[i].GetComponent<Enemy>();
+            if (e != null)
+            {
+                colliders[i].GetComponent<Enemy>().TakeDamage(whipDamage);
+            }
+        }
     }
 }
