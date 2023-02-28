@@ -237,7 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ddc87ab7f43bb4ab94c869cb1bad43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: {fileID: 11400000, guid: 03ff252f1e0382e4cb44be177cc469e1, type: 2}
+  startGame_Scene: {fileID: 11400000, guid: 9f8b6e3bd08e7e44293e4796322b0060, type: 2}
+  quitGame_Scene: {fileID: 11400000, guid: 03ff252f1e0382e4cb44be177cc469e1, type: 2}
 --- !u!1 &318475521 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2335680171377402616, guid: 75f4ff850e97a1743bbda6bf2c66d8cd, type: 3}
@@ -255,8 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59ec7e8e4bf68640a84317550801444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: {fileID: 0}
   optionsMenu: {fileID: 550441273}
+  gameOverMenu: {fileID: 0}
 --- !u!1001 &550441271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -278,23 +279,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8388714017777273085, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8388714017777273085, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8388714017777273085, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8388714018335640288, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8388714018335640288, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8388714018367607540, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -304,13 +305,17 @@ PrefabInstance:
       propertyPath: volumeSlider
       value: 
       objectReference: {fileID: 550441274}
+    - target: {fileID: 8388714018614098240, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8388714018614098246, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_Name
       value: MenuPanel
       objectReference: {fileID: 0}
     - target: {fileID: 8388714018614098246, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8388714018614098247, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_Pivot.x
@@ -498,6 +503,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background Music
       objectReference: {fileID: 0}
+    - target: {fileID: 3157573416533233706, guid: d234bb1d09785b641b390c5e0376c0b4, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157573416533233706, guid: d234bb1d09785b641b390c5e0376c0b4, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 42a5147f3c16e2c409cd99d445c4ea7d, type: 3}
     - target: {fileID: 3157573416533233707, guid: d234bb1d09785b641b390c5e0376c0b4, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -581,7 +594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 199, y: -147.7}
+  m_AnchoredPosition: {x: 176.34204, y: -158.97215}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &930471955
@@ -630,7 +643,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 175096516}
         m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
-        m_MethodName: OnStartClick
+        m_MethodName: OnQuitClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

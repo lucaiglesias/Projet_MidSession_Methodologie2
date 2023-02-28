@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private AsyncOperation async;
-    [SerializeField] SceneData sceneToLoad;
+    //[SerializeField] SceneData sceneToLoad;
     [SerializeField] GameObject optionsMenu;
+    [SerializeField] GameObject gameOverMenu;
+
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
 
     //public void LoadNextScene(string name)
     //{
@@ -28,8 +39,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
+        if(Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
         optionsMenu.SetActive(!optionsMenu.activeSelf);
     }
 
@@ -40,5 +60,11 @@ public class GameManager : MonoBehaviour
 #else
                     Application.Quit();
 #endif
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        gameOverMenu.SetActive(true);
     }
 }
