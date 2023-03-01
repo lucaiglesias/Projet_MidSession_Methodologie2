@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyFactory : MonoBehaviour
 {
+    //Based on class
+
     //SINGLETON
     private static EnemyFactory _instance;
     public static EnemyFactory Instance { get { return _instance; } }

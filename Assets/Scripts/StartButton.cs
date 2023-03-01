@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
+    //based on class
+
     [SerializeField] SceneData startGame_Scene;
     [SerializeField] SceneData quitGame_Scene;
     public void OnStartClick()
@@ -12,6 +14,7 @@ public class StartButton : MonoBehaviour
         Time.timeScale = 1;
         
         SceneManager.LoadScene(startGame_Scene.sceneName);
+
 
     }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //based on https://www.youtube.com/watch?v=p7FnfMRQ6Ec&list=PL0GUZtUkX6t7zQEcvKtdc0NvjVuVcMe6U&index=3
+
     [SerializeField] float speed;
 
     Rigidbody2D rgdbd2d;
@@ -28,7 +30,7 @@ public class Enemy : MonoBehaviour
     {
 
         direction = (Character.Instance.transform.position - transform.position).normalized;
-        rgdbd2d.velocity = direction * speed;
+        rgdbd2d.velocity = direction * speed * CountDown.Instance.pause;
         if (direction.x < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);

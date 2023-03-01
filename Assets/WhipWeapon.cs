@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class WhipWeapon : MonoBehaviour
 {
+    //based on https://www.youtube.com/watch?v=YVOI4Kpw3rg&list=PL0GUZtUkX6t7zQEcvKtdc0NvjVuVcMe6U&index=4
+
     [SerializeField] float timeToAttack = 4f;
     float timer;
 
@@ -35,7 +37,7 @@ public class WhipWeapon : MonoBehaviour
     private void Attack()
     {
         //Debug.Log("Attack");
-        timer = timeToAttack;
+        timer = timeToAttack * CountDown.Instance.pause;
 
         if(playerMove.lastHorizontalVector > 0)
         {

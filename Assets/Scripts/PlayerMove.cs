@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
             lastVerticalVector = movementVector.y;
         }
 
-        movementVector *= speed;
+        movementVector *= speed * CountDown.Instance.pause;
 
         animate.horizontal = movementVector.x;
         animate.vertical = movementVector.y;

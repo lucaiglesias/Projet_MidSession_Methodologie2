@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private AsyncOperation async;
-    //[SerializeField] SceneData sceneToLoad;
     [SerializeField] GameObject optionsMenu;
     [SerializeField] GameObject gameOverMenu;
 
@@ -20,17 +19,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-    //public void LoadNextScene(string name)
-    //{
-    //    if (async == null)
-    //    {
-    //        async = SceneManager.LoadSceneAsync(name);
-    //    }
-    //}
-
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

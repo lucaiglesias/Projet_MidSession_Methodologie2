@@ -5,14 +5,22 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    //Based on class
     [SerializeField] List<GameObject> spawnLocations = new List<GameObject>();
     GameObject spawn;
     int spawnIndex;
 
+    public static Spawner Instance { get; private set; }
 
-    void Start()
+    private void Awake()
     {
-        
+        Instance = this;
+    }
+
+
+    public void startCo()
+    {
+
         StartCoroutine(SpawnCoroutine());
     }
 
