@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
-    //based on class
+    //based on class exercice
 
     [SerializeField] SceneData startGame_Scene;
     [SerializeField] SceneData quitGame_Scene;

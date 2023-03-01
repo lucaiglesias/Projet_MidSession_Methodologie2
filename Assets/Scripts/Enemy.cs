@@ -69,6 +69,9 @@ public class Enemy : MonoBehaviour
         {
             gameObject.SetActive(false);
             Character.Instance.LevelUp(experience_points);
+            
+            //Observer
+            //Subject.Instance.Notify(this);
         }
     }
 

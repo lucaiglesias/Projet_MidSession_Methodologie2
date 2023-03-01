@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+//based on class exercice
 public class SceneData : ScriptableObject
 {
     public string sceneName;

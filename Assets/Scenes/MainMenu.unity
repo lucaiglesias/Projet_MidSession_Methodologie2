@@ -495,8 +495,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8388714018367607540, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2145074219}
+    - target: {fileID: 8388714018367607540, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388714018367607540, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: VolumeSlider, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8388714018367607541, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
       propertyPath: volumeSlider
@@ -1565,6 +1573,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2145074219 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8388714018367607541, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
+  m_PrefabInstance: {fileID: 965345801}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910752c4ee3dd3e429c36e0dd0d20a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3157573415367051952

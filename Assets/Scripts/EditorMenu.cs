@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
+
+//based on class exercice
 public class EditorMenu : MonoBehaviour
 {
     [MenuItem("Tool/Update Scene Assets")]
