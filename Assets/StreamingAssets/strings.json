@@ -1,0 +1,32 @@
+{
+  "strings": [
+    {
+      "key": "start_button",
+      "en": "Start Game",
+      "fr": "Démarrer le jeu",
+      "es": "Iniciar juego",
+      "pt-br": "Novo Jogo"
+    },
+    {
+      "key": "options_button",
+      "en": "Options",
+      "fr": "Options",
+      "es": "Opciones",
+      "pt-br": "Opções"
+    },
+    {
+      "key": "credits_button",
+      "en": "Credits",
+      "fr": "Crédites",
+      "es": "Créditos",
+      "pt-br": "Créditos"
+    },
+    {
+      "key": "exit_button",
+      "en": "Exit Game",
+      "fr": "Quitter le jeu",
+      "es": "Salir del juego",
+      "pt-br": "Sair do jogo"
+    }
+  ]
+}

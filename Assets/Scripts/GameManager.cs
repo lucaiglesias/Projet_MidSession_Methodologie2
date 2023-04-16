@@ -16,7 +16,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Localization.Localizer();
+
     }
+
+
 
 
     void Update()
