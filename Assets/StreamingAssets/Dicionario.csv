@@ -1,7 +1,13 @@
-ï»¿key;en;es;pt;fr;it
-start_game;Start Game;Iniciar Juego;Iniciar Jogo;DÃ©marrer  le jeu;Inizia Gioco
-options;Options;Opciones;OpÃ§Ãµes;ParamÃ¨tres;Opzioni
+key;en;es;pt;fr;it
+start_game;Start Game;Iniciar Juego;Iniciar Jogo;Démarrer  le jeu;Inizia Gioco
+options;Options;Opciones;Opções;Paramètres;Opzioni
 exit;Exit;Salir;Sair;Quitter;Uscire
 language;Language;Idioma;Idioma;Langage;Language
-music;Music;MÃºsica;MÃºsica;Musique ;Musica
+music;Music;Música;Música;Musique ;Musica
 close;Close;Cerrar;Fechar;Fermer;Chiudere
+lives;Lives;Vida;Vida;Vie;Vita
+level;Level;Nivel;Nivel;Niveau;Livello
+restart;Restart Level;Reiniciar;Reiniciar;Redemarrer;Riavviare
+gameOver;Game Over;Juego Terminado;Game Over;Jeu Terminé;Game Over
+returnToGame;Return to Game;Regressar al juego;Retornar ao Jogo; Revenir au Jeu;Tornare al Gioco
+monstersKilled;Monsters Killed;Monstruos Asesinados;Monstros Mortos;Monstres Tués;Mostri Uccisi
