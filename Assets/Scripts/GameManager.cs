@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsMenu;
     [SerializeField] GameObject gameOverMenu;
 
+    public BackUP userData;
+
     public static GameManager Instance { get; private set; }
 
     private void Awake()

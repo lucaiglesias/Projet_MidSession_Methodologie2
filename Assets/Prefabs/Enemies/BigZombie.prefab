@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  hp: 50
+  hp: 7
   enemyAttack: 4
-  experience_points: 20
+  experience_points: 15
   direction: {x: 0, y: 0, z: 0}

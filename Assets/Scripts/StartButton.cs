@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
+    public static StartButton Instance { get; private set; }
+
+
     //based on class exercice
 
     [SerializeField] SceneData startGame_Scene;

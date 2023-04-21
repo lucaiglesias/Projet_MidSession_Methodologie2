@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52d1f1bb121a4774d99152def3934cc0, type: 3}
-  m_Name: Language_Pick
+  m_Script: {fileID: 11500000, guid: 00ddfe01ddecb30428246685b44cb07d, type: 3}
+  m_Name: UserMainMenu
   m_EditorClassIdentifier: 
-  _pick: 
+  sceneName: UserMainMenu
+  sceneAsset: {fileID: 102900000, guid: dbb0983de123c1647b20270c5c0c6268, type: 3}

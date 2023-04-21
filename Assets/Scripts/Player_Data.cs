@@ -18,15 +18,13 @@ public class Player_Data : MonoBehaviour
     string password;
     [SerializeField] TMP_InputField emailInput;
     string email;
-    int gold;
-    int monstersKilled;
-    int gameOver;
     [SerializeField] GameObject wrongEmail;
     [SerializeField] GameObject rightUser;
     [SerializeField] GameObject wrongPassword;
     [SerializeField] GameObject sameUser;
     [SerializeField] GameObject sameEmail;
-    
+
+
     
 
 
@@ -70,7 +68,7 @@ public class Player_Data : MonoBehaviour
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
             request.SetRequestHeader("X-Parse-Revocable-Session", "1");
             request.SetRequestHeader("Content-Type", "application/json");
-            var json = "{\"username\": \"" + username + "\",\"email\": \""+email+"\",\"password\": \""+password+"\"}";
+            var json = "{\"username\": \"" + username + "\",\"password\": \""+password+"\"}";
             request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             request.downloadHandler = new DownloadHandlerBuffer();
             yield return request.SendWebRequest();
@@ -95,48 +93,7 @@ public class Player_Data : MonoBehaviour
         }
     }
 
-    //public IEnumerator GetDeathTracker()
-    //{
-    //    string uri = "https://parseapi.back4app.com/classes/DeathTracker/?where={\"Name\":\"" + teste + "\"}";
-    //    using (var request = UnityWebRequest.Get(uri))
-    //    {
-    //        request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-    //        request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-    //        request.SetRequestHeader("Content-Type", "application/json");
-    //        yield return request.SendWebRequest();
-    //        if (request.result != UnityWebRequest.Result.Success)
-    //        {
-    //            Debug.LogError(request.error);
-    //            yield break;
-    //        }
-    //        Debug.Log(request.downloadHandler.text);
-    //        DeathTrackerResults results = JsonUtility.FromJson<DeathTrackerResults>(request.downloadHandler.text);
 
 
-    //        //var matches = Regex.Matches(request.downloadHandler.text, "\"Count\":(\\d+)", RegexOptions.Multiline); 
-    //        //enemyDeathText.text = matches.First().Groups[1].Value; 
-    //        enemyDeathText.text = results.results.First().Count.ToString();
-    //    }
-    //}
 
-    //public IEnumerator IncEnemyDeathTracker()
-    //{
-    //    byte[] MyData = BitConverter.GetBytes(i);
-    //    using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/DeathTracker/" + id + "", "PUT"))
-    //    {
-    //        request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-    //        request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-    //        request.SetRequestHeader("Content-Type", "application/json");
-    //        var json = "{\"Count\": " + i + "}";
-    //        request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
-    //        request.downloadHandler = new DownloadHandlerBuffer();
-    //        yield return request.SendWebRequest();
-    //        if (request.result != UnityWebRequest.Result.Success)
-    //        {
-    //            Debug.LogError(request.error);
-    //            yield break;
-    //        }
-    //        Debug.Log(request.downloadHandler.text);
-    //    }
-    //}
 }
