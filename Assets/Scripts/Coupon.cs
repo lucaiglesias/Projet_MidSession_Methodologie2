@@ -7,8 +7,8 @@ using UnityEngine;
 public class Coupon
 {
     public string objectId;
-    public string updatedAt;
-    public string createdAt;
+    [NonSerialized] public string updatedAt;
+    [NonSerialized] public string createdAt;
     [NonSerialized] public string ACL;
     public string Code;
     public string userId;

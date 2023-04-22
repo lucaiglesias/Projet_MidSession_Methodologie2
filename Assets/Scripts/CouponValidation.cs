@@ -41,7 +41,7 @@ public class CouponValidation : MonoBehaviour
 
             Debug.Log(request.downloadHandler.text);
             CouponResults codeReturn = JsonUtility.FromJson<CouponResults>(request.downloadHandler.text);
-
+            bool typeRedeemed = false;
             if (codeReturn.results.Length == 0)
             {
                 DoesntExistCode.SetActive(true);
@@ -49,10 +49,10 @@ public class CouponValidation : MonoBehaviour
             else if (!codeReturn.results.First().Redeemed)
             {
                 Coupon coupon = codeReturn.results.First();
-                StartCoroutine(GetUserCoupons(GameManager.Instance.loggedUser.objectId));
+                GetUserCoupons(GameManager.Instance.loggedUser.objectId);
                 if (userCoupons != null)
                 {
-                    bool typeRedeemed = false;
+
                     for (int i = 0; i < userCoupons.Length; i++)
                     {
                         if (coupon.Type.Equals(userCoupons[i].Type))
@@ -63,32 +63,36 @@ public class CouponValidation : MonoBehaviour
 
                     }
 
-                    if (typeRedeemed)
+                }
+                if (typeRedeemed)
+                {
+                    SameTypeCode.SetActive(true);
+                    yield break;
+                }
+                else
+                {
+
+
+
+                    if (coupon.Type == "A")
                     {
-                        SameTypeCode.SetActive(true);
-                        yield break;
+                        GameManager.Instance.characterData.Gold += 10;
                     }
+                    if (coupon.Type == "B")
+                    {
+                        GameManager.Instance.characterData.MaxHealth += 50;
+                    }
+                    if (coupon.Type == "C")
+                    {
+                        GameManager.Instance.characterData.PowerAttack += 5;
+                    }
+                    coupon.Redeemed = true;
+                    coupon.userId = GameManager.Instance.loggedUser.objectId;
+                    StartCoroutine(UpdateCoupon(coupon));
+
+
 
                 }
-
-                if (coupon.Type == "A")
-                {
-                    GameManager.Instance.characterData.Gold += 10;
-                }
-                if (coupon.Type == "B")
-                {
-                    GameManager.Instance.characterData.MaxHealth += 50;
-                }
-                if (coupon.Type == "C")
-                {
-                    GameManager.Instance.characterData.PowerAttack += 5;
-                }
-                coupon.Redeemed = true;
-                coupon.userId = GameManager.Instance.loggedUser.objectId;
-                StartCoroutine(UpdateCoupon(coupon));
-
-
-
             }
             else
             {
@@ -99,7 +103,7 @@ public class CouponValidation : MonoBehaviour
 
     public IEnumerator UpdateCoupon(Coupon coupon)
     {
-        using (var request = new UnityWebRequest("https://parseapi.back4app.com/Coupon/" + coupon.objectId, "PUT"))
+        using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/Coupon/" + coupon.objectId, "PUT"))
         {
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
@@ -108,7 +112,15 @@ public class CouponValidation : MonoBehaviour
             var json = JsonUtility.ToJson(coupon);
             request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             request.downloadHandler = new DownloadHandlerBuffer();
-            yield return request.SendWebRequest();
+            request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(request.error);
+                yield break;
+
+            }
+
+            Debug.Log(request.downloadHandler.text);
         }
     }
     public IEnumerator GetUserCoupons(string userId)
@@ -120,7 +132,7 @@ public class CouponValidation : MonoBehaviour
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
             request.SetRequestHeader("Content-Type", "application/json");
-            yield return request.SendWebRequest();
+            request.SendWebRequest();
             if (request.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError(request.error);
