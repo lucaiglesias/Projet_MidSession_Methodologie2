@@ -3518,7 +3518,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -60
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4865240796007617467, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3726370b44fe8b945bf2738b14395346, type: 3}
 --- !u!224 &965345802 stripped
 RectTransform:
@@ -6661,17 +6662,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 519483528}
   gameOverMenu: {fileID: 0}
-  userData:
+  characterData:
     objectId: 
     updatedA: 
     createdAt: 
     LoginId: 
     username: Local
-    MaxHealth: 1000
+    MaxHealth: 100
     PowerAttack: 1
     Gold: 0
     MonstersKilled: 0
     GameOver: 0
+  loggedUser:
+    objectId: 
+    username: 
+    email: 
+    createdAt: 
+    updatedA: 
+    emailVerified: 0
+    sessionToken: 
 --- !u!114 &1887092085
 MonoBehaviour:
   m_ObjectHideFlags: 0

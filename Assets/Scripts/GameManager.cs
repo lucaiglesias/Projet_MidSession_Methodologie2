@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsMenu;
     [SerializeField] GameObject gameOverMenu;
 
-    public BackUP userData;
+    public CharacterData characterData;
+    public UserIdCheck loggedUser;
+
 
     public static GameManager Instance { get; private set; }
 
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         Localization.Localizer();
+        //DontDestroyOnLoad(this);
 
     }
 
@@ -30,12 +33,13 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
+            optionsMenu.SetActive(!optionsMenu.activeSelf);
         }
     }
 
     public void Pause()
     {
-        if(Time.timeScale == 1)
+        if (Time.timeScale == 1)
         {
             Time.timeScale = 0;
 
@@ -44,7 +48,6 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }
-        optionsMenu.SetActive(!optionsMenu.activeSelf);
     }
 
     public void QuitGame()

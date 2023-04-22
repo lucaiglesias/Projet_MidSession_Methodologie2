@@ -4,9 +4,9 @@ using UnityEngine;
 using System.IO;
 
 public class Persistance : MonoBehaviour
-{  
+{
 
-    public static void SaveData(BackUP data,string fileName)
+    public static void SaveData(CharacterData data, string fileName)
     {
         string savePath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + fileName + ".json";
         Debug.Log("Saving Data at " + savePath);
@@ -26,7 +26,7 @@ public class Persistance : MonoBehaviour
         writer.Write(json);
     }
 
-    public static BackUP LoadData(string fileName)
+    public static CharacterData LoadData(string fileName)
     {
         try
         {
@@ -35,18 +35,16 @@ public class Persistance : MonoBehaviour
 
             if (json != null)
             {
-                return JsonUtility.FromJson<BackUP>(json);
+                return JsonUtility.FromJson<CharacterData>(json);
             }
             return null;
 
             //Character data = JsonUtility.FromJson<Character>(json);
             //Debug.Log(data.ToString());
         }
-        catch(FileNotFoundException fnfe)
+        catch (FileNotFoundException)
         {
-            BackUP newuser = new BackUP();
-            SaveData(newuser, "Local");
-            return newuser;
+            return null;
         }
     }
 

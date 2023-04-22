@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class BackUP
+public class CharacterData
 {
     public string objectId;
     public string updatedA;
@@ -18,10 +18,29 @@ public class BackUP
     public int MonstersKilled;
     public int GameOver;
 
-    public BackUP()
+    public CharacterData()
     {
         username = "Local";
-        MaxHealth = 1000;
+        MaxHealth = 100;
+        PowerAttack = 1;
+        Gold = 0;
+        MonstersKilled = 0;
+        GameOver = 0;
+    }
+
+    public CharacterData(string username)
+    {
+
+        if (username == null)
+        {
+            this.username = "Local";
+
+        }
+        else
+        {
+            this.username = username;
+        }
+        MaxHealth = 100;
         PowerAttack = 1;
         Gold = 0;
         MonstersKilled = 0;
@@ -32,8 +51,8 @@ public class BackUP
 }
 
 [Serializable]
-public class BackUPResults
+public class CharacteDataResults
 {
-    public BackUP[] results;
+    public CharacterData[] results;
 }
 

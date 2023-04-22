@@ -15,17 +15,17 @@ public class UserMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        username.text = GameManager.Instance.userData.username;
-        maxHp.text = ""+ GameManager.Instance.userData.MaxHealth;
-        Gold.text = "" + GameManager.Instance.userData.Gold;
-        PowerAttack.text = "" + GameManager.Instance.userData.PowerAttack;
-        MonstersKilled.text = "" + GameManager.Instance.userData.MonstersKilled;
-        GameOver.text = ""+ GameManager.Instance.userData.GameOver;
+        username.text = GameManager.Instance.characterData.username;
+        maxHp.text = "" + GameManager.Instance.characterData.MaxHealth;
+        Gold.text = "" + GameManager.Instance.characterData.Gold;
+        PowerAttack.text = "" + GameManager.Instance.characterData.PowerAttack;
+        MonstersKilled.text = "" + GameManager.Instance.characterData.MonstersKilled;
+        GameOver.text = "" + GameManager.Instance.characterData.GameOver;
     }
 }

@@ -20,6 +20,7 @@ public class PlayerLogin : MonoBehaviour
     //string userID;
     string userIDtext;
 
+
     public void OnClick()
     {
         username = usernameInput.text;
@@ -31,18 +32,25 @@ public class PlayerLogin : MonoBehaviour
 
     public void NoLoginClick()
     {
-        BackUP userdata = Persistance.LoadData(GameManager.Instance.userData.username);
-        if(userdata != null)
+        CharacterData userdata = Persistance.LoadData(GameManager.Instance.characterData.username);
+        if (userdata != null)
         {
             //Character.Instance.LoadBackup(userdata);
-            GameManager.Instance.userData = userdata;
-            SceneManager.LoadScene(UserMenuScene.sceneName);
+            GameManager.Instance.characterData = userdata;
         }
+        else
+        {
+            CharacterData characterData = new CharacterData();
+            Persistance.SaveData(characterData, characterData.username);
+            GameManager.Instance.characterData = characterData;
+        }
+        SceneManager.LoadScene(UserMenuScene.sceneName);
     }
+
 
     public IEnumerator LoadPlayer()
     {
-        string uri = "https://parseapi.back4app.com/login?username="+username+"&password="+password;
+        string uri = "https://parseapi.back4app.com/login?username=" + username + "&password=" + password;
         using (var request = UnityWebRequest.Get(uri))
         {
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
@@ -55,7 +63,7 @@ public class PlayerLogin : MonoBehaviour
                 if (errorCode.code == 205)
                 {
                     notVerified.SetActive(true);
-                    
+
                 }
                 if (errorCode.code == 101)
                 {
@@ -67,8 +75,9 @@ public class PlayerLogin : MonoBehaviour
                 yield break;
             }
             Debug.Log(request.downloadHandler.text);
-            UserIdCheck userID = JsonUtility.FromJson<UserIdCheck>(request.downloadHandler.text);
-            userIDtext = userID.objectId;
+            UserIdCheck user = JsonUtility.FromJson<UserIdCheck>(request.downloadHandler.text);
+            userIDtext = user.objectId;
+            GameManager.Instance.loggedUser = user;
             Debug.Log(userIDtext);
             StartCoroutine(CheckExist());
 
@@ -93,7 +102,7 @@ public class PlayerLogin : MonoBehaviour
             }
 
             Debug.Log(request.downloadHandler.text);
-            BackUPResults backups = JsonUtility.FromJson<BackUPResults>(request.downloadHandler.text);
+            CharacteDataResults backups = JsonUtility.FromJson<CharacteDataResults>(request.downloadHandler.text);
 
             if (backups.results.Length == 0)
             {
@@ -101,7 +110,17 @@ public class PlayerLogin : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.userData = backups.results.First();
+                CharacterData characterDataFile = Persistance.LoadData(backups.results.First().LoginId);
+                if (characterDataFile != null)
+                {
+                    GameManager.Instance.characterData = characterDataFile;
+                }
+                else
+                {
+                    GameManager.Instance.characterData = backups.results.First();
+                    Persistance.SaveData(GameManager.Instance.characterData, GameManager.Instance.characterData.LoginId);
+
+                }
                 SceneManager.LoadScene(UserMenuScene.sceneName);
             }
         }
@@ -111,7 +130,7 @@ public class PlayerLogin : MonoBehaviour
     {
         using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/BackUp", "POST"))
         {
-            var json = "{\"LoginId\": \"" + userIDtext + "\",\"username\": \"" + username + "\", \"MaxHealth\" : 1000, \"PowerAttack\" : 1, \"Gold\" : 0, \"MonstersKilled\" : 0, \"GameOver\" : 0}";
+            var json = "{\"LoginId\": \"" + userIDtext + "\",\"username\": \"" + username + "\", \"MaxHealth\" : 100, \"PowerAttack\" : 1, \"Gold\" : 0, \"MonstersKilled\" : 0, \"GameOver\" : 0}";
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
             request.SetRequestHeader("Content-Type", "application/json");
@@ -124,7 +143,7 @@ public class PlayerLogin : MonoBehaviour
                 yield break;
             }
             Persistance.SaveData(json, userIDtext);
-            GameManager.Instance.userData = JsonUtility.FromJson<BackUP>(json);
+            GameManager.Instance.characterData = JsonUtility.FromJson<CharacterData>(json);
             SceneManager.LoadScene(UserMenuScene.sceneName);
             Debug.Log(request.downloadHandler.text);
         }
