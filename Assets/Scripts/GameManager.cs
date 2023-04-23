@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsMenu;
     [SerializeField] GameObject gameOverMenu;
 
+
     public CharacterData characterData;
     public UserIdCheck loggedUser;
 
@@ -19,8 +20,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        Localization.Localizer();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            Localization.Localizer();
+        }
         //DontDestroyOnLoad(this);
 
     }

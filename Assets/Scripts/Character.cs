@@ -8,20 +8,20 @@ public class Character : MonoBehaviour
 {
     //based on https://www.youtube.com/watch?v=ixSN42SM3gQ&list=PL0GUZtUkX6t7zQEcvKtdc0NvjVuVcMe6U&index=1
 
-    public string username = "Local";
-    public int maxHp = 100;
-    public int currentHp = 100;
-    public int lvl = 1;
+    public string username = "";
+    public int maxHp;
+    public int currentHp;
+    public int lvl;
     public int lvlBar = 0;
     public int maxLvlBar = 100;
-    public int Gold = 0;
+    public int Gold;
     public int PowerAttack;
     public int MonstersKilled;
     public int GameOver;
     [SerializeField] HealthBar healthBar;
     [SerializeField] LvlBar lvlbar;
 
-    public string LevelName;
+    
 
 
     public static Character Instance { get; private set; }
@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
     {
         Instance = this;
         LoadBackup(GameManager.Instance.characterData);
-
+        currentHp = maxHp;
 
     }
 
@@ -82,12 +82,12 @@ public class Character : MonoBehaviour
     {
         lvlBar += lvlup;
 
-        if (lvl == 4)
-        {
-            var progress = SceneManager.LoadSceneAsync(LevelName, LoadSceneMode.Single);
+        //if (lvl == 4)
+        //{
+            
 
-            lvl = 1;
-        }
+        //    lvl = 1;
+        //}
 
         if (lvlBar >= maxLvlBar)
         {
@@ -111,6 +111,9 @@ public class Character : MonoBehaviour
         Gold = backupData.Gold;
         MonstersKilled = backupData.MonstersKilled;
         GameOver = backupData.GameOver;
+
+        GameManager.Instance.characterData = backupData;
+
 
     }
 

@@ -69,6 +69,7 @@ public class Enemy : MonoBehaviour
         {
             gameObject.SetActive(false);
             Character.Instance.LevelUp(experience_points);
+            Character.Instance.MonstersKilled++;
             
             //Observer
             //Subject.Instance.Notify(this);

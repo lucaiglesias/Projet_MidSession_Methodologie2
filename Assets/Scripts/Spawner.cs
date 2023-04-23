@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     //Based on class
     [SerializeField] List<GameObject> spawnLocations = new List<GameObject>();
     GameObject spawn;
+    [SerializeField] GameObject gold;
     int spawnIndex;
 
     public static Spawner Instance { get; private set; }
@@ -22,6 +23,7 @@ public class Spawner : MonoBehaviour
     {
 
         StartCoroutine(SpawnCoroutine());
+        StartCoroutine(GoldCoroutine());
     }
 
     IEnumerator SpawnCoroutine()
@@ -33,7 +35,7 @@ public class Spawner : MonoBehaviour
 
             EnemyFactory.Instance.CreateLvl1Enemy().transform.position = spawn.transform.position;
 
-            if(Character.Instance.lvl >= 2)
+            if (Character.Instance.lvl >= 2)
             {
                 EnemyFactory.Instance.CreateLvl2Enemy().transform.position = spawn.transform.position;
             }
@@ -44,7 +46,21 @@ public class Spawner : MonoBehaviour
             }
 
             yield return new WaitForSeconds(2);
+
+            
+
         }
     }
 
+    IEnumerator GoldCoroutine()
+    {
+        while (true)
+        {
+            spawnIndex = UnityEngine.Random.Range(0, spawnLocations.Count);
+            spawn = spawnLocations[spawnIndex];
+            Instantiate(gold, spawn.transform.position,spawn.transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+
+        }
+    }
 }
