@@ -49,7 +49,7 @@ public class CouponValidation : MonoBehaviour
             else if (!codeReturn.results.First().Redeemed)
             {
                 Coupon coupon = codeReturn.results.First();
-                GetUserCoupons(GameManager.Instance.loggedUser.objectId);
+                StartCoroutine(GetUserCoupons(GameManager.Instance.loggedUser.objectId));
                 if (userCoupons != null)
                 {
 
@@ -88,7 +88,10 @@ public class CouponValidation : MonoBehaviour
                     }
                     coupon.Redeemed = true;
                     coupon.userId = GameManager.Instance.loggedUser.objectId;
+                    SucessCode.SetActive(true);
                     StartCoroutine(UpdateCoupon(coupon));
+                    Persistance.SaveData(GameManager.Instance.characterData, coupon.userId);
+                    StartCoroutine(PlayerLogin.UpdatePlayerBackUp(GameManager.Instance.characterData));
 
 
 
@@ -127,11 +130,11 @@ public class CouponValidation : MonoBehaviour
     {
         userCoupons = null;
         string uri = "https://parseapi.back4app.com/classes/Coupon?where={\"userId\":\"" + userId + "\"}";
-        var request = UnityWebRequest.Get(uri);
+        using (var request = UnityWebRequest.Get(uri))
         {
             request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
             request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("X-Parse-Revocable-Session", "1");
             request.SendWebRequest();
             if (request.result != UnityWebRequest.Result.Success)
             {
@@ -142,7 +145,7 @@ public class CouponValidation : MonoBehaviour
 
             Debug.Log(request.downloadHandler.text);
             CouponResults codeReturn = JsonUtility.FromJson<CouponResults>(request.downloadHandler.text);
-            userCoupons = codeReturn.results.ToArray();
+            userCoupons = codeReturn.results;
 
 
         }

@@ -7,8 +7,8 @@ using UnityEngine;
 public class CharacterData
 {
     public string objectId;
-    public string updatedA;
-    public string createdAt;
+    [NonSerialized]public string updatedA;
+    [NonSerialized]public string createdAt;
     [NonSerialized] public string ACL;
     public string LoginId;
     public string username;

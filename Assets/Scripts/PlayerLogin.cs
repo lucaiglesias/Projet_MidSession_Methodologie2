@@ -148,4 +148,23 @@ public class PlayerLogin : MonoBehaviour
             Debug.Log(request.downloadHandler.text);
         }
     }
+
+    public static IEnumerator UpdatePlayerBackUp(CharacterData characterData)
+    {
+        using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/BackUp/"+characterData.objectId, "PUT"))
+        {
+            var json = JsonUtility.ToJson(characterData);
+            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
+            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
+            request.downloadHandler = new DownloadHandlerBuffer();
+            yield return request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(request.error);
+                yield break;
+            }
+        }
+    }
 }
