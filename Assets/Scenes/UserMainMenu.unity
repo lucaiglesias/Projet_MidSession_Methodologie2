@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 343877749}
   - component: {fileID: 343877748}
   m_Layer: 5
-  m_Name: RendeemCode(TMP)
+  m_Name: RendeemCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

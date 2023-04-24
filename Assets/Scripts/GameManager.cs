@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private AsyncOperation async;
     [SerializeField] GameObject optionsMenu;
     [SerializeField] GameObject gameOverMenu;
+    [SerializeField] GameObject nextLevel;
 
 
     public CharacterData characterData;
@@ -71,5 +72,21 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         gameOverMenu.SetActive(true);
+    }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 0;
+        Character.Instance.lvl = 1;
+        if (loggedUser.objectId == null)
+        {
+            Persistance.SaveData(Character.Instance.getCharacterData(), "Local");
+        }
+        else
+        {
+            Persistance.SaveData(Character.Instance.getCharacterData(), loggedUser.objectId);
+        }
+        StartCoroutine(PlayerLogin.UpdatePlayerBackUp(Character.Instance.getCharacterData()));
+        nextLevel.SetActive(true);
     }
 }

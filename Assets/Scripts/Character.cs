@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     public int lvlBar = 0;
     public int maxLvlBar = 100;
     public int Gold;
-    public int PowerAttack;
+    public int PowerAttack = 1;
     public int MonstersKilled;
     public int GameOver;
     [SerializeField] HealthBar healthBar;
@@ -40,6 +40,22 @@ public class Character : MonoBehaviour
 
     public void Update()
     {
+        if (lvl >= 2)
+        {
+            GameManager.Instance.NextLevel();
+        }
+    }
+
+    public CharacterData getCharacterData()
+    {
+        var characterData = new CharacterData();
+        characterData.username = username;
+        characterData.MaxHealth = maxHp;
+        characterData.PowerAttack = PowerAttack;
+        characterData.Gold = Gold;
+        characterData.MonstersKilled = MonstersKilled;
+        characterData.GameOver = GameOver;
+        return characterData;
     }
 
 
@@ -49,6 +65,7 @@ public class Character : MonoBehaviour
         currentHp -= damage;
         if (currentHp <= 0)
         {
+            GameOver++;
             Debug.Log("Character is dead");
             GameManager.Instance.GameOver();
         }
@@ -82,15 +99,9 @@ public class Character : MonoBehaviour
     {
         lvlBar += lvlup;
 
-        //if (lvl == 4)
-        //{
-            
-
-        //    lvl = 1;
-        //}
-
         if (lvlBar >= maxLvlBar)
         {
+            PowerAttack++;
             currentHp = maxHp;
 
             lvl++;

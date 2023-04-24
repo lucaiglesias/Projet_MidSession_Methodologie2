@@ -30,14 +30,17 @@ public class PlayerLogin : MonoBehaviour
 
     }
 
+    //Login without Account
     public void NoLoginClick()
     {
+        //if already exists
         CharacterData userdata = Persistance.LoadData(GameManager.Instance.characterData.username);
         if (userdata != null)
         {
             //Character.Instance.LoadBackup(userdata);
             GameManager.Instance.characterData = userdata;
         }
+        //if doesnt exist
         else
         {
             CharacterData characterData = new CharacterData();
@@ -48,6 +51,7 @@ public class PlayerLogin : MonoBehaviour
     }
 
 
+    //Login avec compte
     public IEnumerator LoadPlayer()
     {
         string uri = "https://parseapi.back4app.com/login?username=" + username + "&password=" + password;
@@ -59,12 +63,14 @@ public class PlayerLogin : MonoBehaviour
             yield return request.SendWebRequest();
             if (request.result != UnityWebRequest.Result.Success)
             {
+                //If account was not verified
                 CodeError errorCode = JsonUtility.FromJson<CodeError>(request.downloadHandler.text);
                 if (errorCode.code == 205)
                 {
                     notVerified.SetActive(true);
 
                 }
+                //if account was not found
                 if (errorCode.code == 101)
                 {
                     invalidUser.SetActive(true);
@@ -85,6 +91,7 @@ public class PlayerLogin : MonoBehaviour
         }
     }
 
+    //Check if account already has a backup
     public IEnumerator CheckExist()
     {
         string uri = "https://parseapi.back4app.com/classes/BackUp/?where={\"LoginId\":\"" + userIDtext + "\"}";
@@ -100,7 +107,7 @@ public class PlayerLogin : MonoBehaviour
                 yield break;
 
             }
-
+            //if there's no data on their account
             Debug.Log(request.downloadHandler.text);
             CharacteDataResults backups = JsonUtility.FromJson<CharacteDataResults>(request.downloadHandler.text);
 
@@ -108,13 +115,15 @@ public class PlayerLogin : MonoBehaviour
             {
                 StartCoroutine(CreatePlayerBackUp());
             }
+            //if there's data on their account, load local file
             else
-            {
+            {   
                 CharacterData characterDataFile = Persistance.LoadData(backups.results.First().LoginId);
                 if (characterDataFile != null)
                 {
                     GameManager.Instance.characterData = characterDataFile;
                 }
+                //if there's no file, create a new file
                 else
                 {
                     GameManager.Instance.characterData = backups.results.First();
@@ -126,6 +135,7 @@ public class PlayerLogin : MonoBehaviour
         }
     }
 
+    //Create data on backup
     public IEnumerator CreatePlayerBackUp()
     {
         using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/BackUp", "POST"))
@@ -149,6 +159,7 @@ public class PlayerLogin : MonoBehaviour
         }
     }
 
+    //update backup
     public static IEnumerator UpdatePlayerBackUp(CharacterData characterData)
     {
         using (var request = new UnityWebRequest("https://parseapi.back4app.com/classes/BackUp/"+characterData.objectId, "PUT"))

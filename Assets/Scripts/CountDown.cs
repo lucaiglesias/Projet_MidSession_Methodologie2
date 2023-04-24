@@ -13,6 +13,7 @@ public class CountDown : MonoBehaviour
     public float fadeTime = 0.1f;
     private Color finalColor;
     public int pause = 0;
+    [SerializeField] string message;
 
     public static CountDown Instance { get; private set; }
 
@@ -36,8 +37,9 @@ public class CountDown : MonoBehaviour
             countdownTime--;
         }
 
-        countdownDisplay.text = "Kill !!!";
+        countdownDisplay.text = message+" !!!";
         pause = 1;
+        //Time.timeScale = 1;
         Spawner.Instance.startCo();
         yield return new WaitForSeconds(1f);
 

@@ -7,8 +7,10 @@ public class NextScene : MonoBehaviour
 {
     public string LevelName;
 
+
     public void OnClick()
     {
+        Time.timeScale = 1;
         var progress = SceneManager.LoadSceneAsync(LevelName, LoadSceneMode.Single);
     }
 }

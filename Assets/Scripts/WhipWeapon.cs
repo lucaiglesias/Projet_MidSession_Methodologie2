@@ -37,6 +37,7 @@ public class WhipWeapon : MonoBehaviour
     private void Attack()
     {
         //Debug.Log("Attack");
+        whipDamage = Character.Instance.PowerAttack;
         timer = timeToAttack * CountDown.Instance.pause;
 
         if(playerMove.lastHorizontalVector > 0)
